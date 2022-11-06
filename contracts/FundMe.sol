@@ -14,10 +14,10 @@ contract FundMe {
   // 21,415 * 141000000000 = $9,058545
   // 23,515 * 141000000000 = $9,946845
 
-  address[] public s_funders;
-  mapping(address => uint256) public s_addressToAmountFunded; // s_ - storage
+  address[] private s_funders;
+  mapping(address => uint256) private s_addressToAmountFunded; // s_ - storage
 
-  address public immutable i_owner; // i_ - immutable
+  address private immutable i_owner; // i_ - immutable
 
   // 21,508 gas - immutable
   // 23,644 gas - non-immutable
@@ -104,6 +104,22 @@ contract FundMe {
 
   receive() external payable {
     fund();
+  }
+
+  function getOwner() public view returns (address) {
+    return i_owner;
+  }
+
+  function getFunder(uint256 index) public view returns (address) {
+    return s_funders[index];
+  }
+
+  function getAddressToAmountFunded(address funder)
+    public
+    view
+    returns (uint256)
+  {
+    return s_addressToAmountFunded[funder];
   }
 
   function getPriceFeed() public view returns (AggregatorV3Interface) {

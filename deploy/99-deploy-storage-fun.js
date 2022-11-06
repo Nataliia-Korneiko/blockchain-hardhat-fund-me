@@ -6,7 +6,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  log('----------------------------------------------------');
+  log('------------------------------------------------');
   log('Deploying FunWithStorage and waiting for confirmations...');
 
   const funWithStorage = await deploy('FunWithStorage', {
